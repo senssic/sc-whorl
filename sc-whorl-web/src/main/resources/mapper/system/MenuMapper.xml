@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sc.whorl.logic.domain.dao.system.MenuMapper" >
+  <resultMap id="BaseResultMap" type="sc.whorl.logic.domain.model.system.Menu" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="tid" property="tid" jdbcType="BIGINT" />
+    <result column="parentId" property="parentId" jdbcType="BIGINT" />
+    <result column="menuUrl" property="menuUrl" jdbcType="VARCHAR" />
+    <result column="menuName" property="menuName" jdbcType="VARCHAR" />
+    <result column="permissionId" property="permissionId" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="applicationCode" property="applicationCode" jdbcType="VARCHAR" />
+    <result column="createAt" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="createBy" property="createBy" jdbcType="VARCHAR" />
+    <result column="modifyAt" property="modifyAt" jdbcType="TIMESTAMP" />
+    <result column="modifyBy" property="modifyBy" jdbcType="VARCHAR" />
+    <result column="orderIndex" property="orderIndex" jdbcType="INTEGER" />
+  </resultMap>
+    <select id="selectMenuByUserId" resultType="sc.whorl.logic.domain.model.system.ext.ExtMenu">
+        SELECT
+        f.tid parnetId,f.menuName parentMenuName,d.tid menuId,d.menuName,d.menuUrl,d.applicationCode,d.orderIndex
+        FROM
+        `user` a
+        INNER JOIN userrole b ON a.tid = b.userId
+        INNER JOIN rolepermission c ON b.roleId = c.roleId
+        INNER JOIN menu d ON c.permissionId = d.permissionId
+        LEFT JOIN menu f on d.parentId=f.tid and f.parentId=0
+        where a.`status`='EBL' AND b.`status`='EBL' and c.`status`='EBL' and d.`status`='EBL' and a.tid=#{userId} ORDER BY d.tid desc
+    </select>
+</mapper>

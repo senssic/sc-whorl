@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sc.whorl.logic.domain.dao.auth.UserMapper">
+  <resultMap id="BaseResultMap" type="sc.whorl.logic.domain.model.auth.User">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="tid" jdbcType="BIGINT" property="tid" />
+    <result column="loginName" jdbcType="VARCHAR" property="loginName" />
+    <result column="passWord" jdbcType="VARCHAR" property="passWord" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="createAt" jdbcType="TIMESTAMP" property="createAt" />
+    <result column="createBy" jdbcType="VARCHAR" property="createBy" />
+    <result column="modifyAt" jdbcType="TIMESTAMP" property="modifyAt" />
+    <result column="modifyBy" jdbcType="VARCHAR" property="modifyBy" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+
+
+    <select id="selectRolsByUserId" resultType="sc.whorl.logic.domain.model.auth.Role">
+        select b.* from user a INNER JOIN  userrole ur on a.tid=ur.userid INNER JOIN role b on ur.roleid=b.tid
+        where a.status='EBL' and b.status='EBL' and a.tid=#{userId}
+    </select>
+
+</mapper>
