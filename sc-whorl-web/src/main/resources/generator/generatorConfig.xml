@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="application.properties"/>
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="mergeable" value="false"></property>
+        <plugin type="com.sc.mybatis.generator.MapperPlugin">
+            <property name="mappers" value="sc.whorl.system.commons.MyMapper"/>
+            <!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
+            <property name="caseSensitive" value="true"/>
+            <!--caseAlias 是否生成别名注解 默认是true -->
+            <property name="caseAlias" value="true"/>
+        </plugin>
+
+        <jdbcConnection driverClass="${druid.driver-class}"
+                        connectionURL="${druid.url}"
+                        userId="${druid.username}"
+                        password="${druid.password}">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="sc.whorl.logic.domain.model.auth"
+                            targetProject="C:\work\workspace\sc-whorl\sc-whorl-web\src\main\java" />
+        <sqlMapGenerator targetPackage="mapper.auth"
+                         targetProject="C:\work\workspace\sc-whorl\sc-whorl-web\src\main\resources" />
+        <javaClientGenerator targetPackage="sc.whorl.logic.domain.dao.auth"
+                             targetProject="C:\work\workspace\sc-whorl\sc-whorl-web\src\main\java" type="XMLMAPPER" >
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table schema="" tableName="role">
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="tid"  sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table schema="" tableName="rolepermission" domainObjectName="RolePermission">
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="tid"  sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table schema="" tableName="user">
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="tid"  sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table schema="" tableName="userrole" domainObjectName="UserRole">
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="tid"  sqlStatement="Mysql" identity="true"/>
+        </table>
+
+
+    </context>
+</generatorConfiguration>

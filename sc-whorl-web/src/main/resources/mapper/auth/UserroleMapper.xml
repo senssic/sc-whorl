@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sc.whorl.logic.domain.dao.auth.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="sc.whorl.logic.domain.model.auth.UserRole">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="tid" jdbcType="BIGINT" property="tid" />
+    <result column="userId" jdbcType="BIGINT" property="userId" />
+    <result column="roleId" jdbcType="BIGINT" property="roleId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="createAt" jdbcType="TIMESTAMP" property="createAt" />
+    <result column="createBy" jdbcType="VARCHAR" property="createBy" />
+    <result column="modifyAt" jdbcType="TIMESTAMP" property="modifyAt" />
+    <result column="modifyBy" jdbcType="VARCHAR" property="modifyBy" />
+  </resultMap>
+
+
+</mapper>
